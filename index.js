@@ -158,3 +158,5 @@ restartButton.addEventListener("click", restart);
 clicker.addEventListener("click", clicked);
 clicker.addEventListener("mousedown", pressed);
 clicker.addEventListener("mouseup", released);
+clicker.addEventListener("touchstart", pressed);
+clicker.addEventListener("touchend", released);
