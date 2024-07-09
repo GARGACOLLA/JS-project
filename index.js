@@ -1,44 +1,3 @@
-function restart () {
-    counter.innerText = 0;
-    ingameData.clickerCoef = 1;
-    ingameData.timeCoef = 1;
-    ingameData.gameMode = 0;
-}
-
-function clicked () {
-    counter.innerText = 1 * counter.innerText + (1 * ingameData.clickerCoef);
-    ingameData.logicCounter++;
-    if (ingameData.logicCounter >= 25) {
-        ingameData.logicCounter = 0;
-        ingameData.timeCoef++;
-        ingameData.clickerCoef++;
-        ingameData.gameMode++;
-    }
-    clearTimeout(stopWatch);
-    stopWatch = setTimeout(losingStreak, 5000 / ingameData.timeCoef)
-}
-
-function losingStreak () {
-    ingameData.gameMode--;
-    ingameData.clickerCoef--;
-    ingameData.timeCoef--;
-    ingameData.logicCounter = 0;
-    gameModeStylesReleased()
-    if (ingameData.gameMode > 0) {
-        stopWatch = setTimeout(losingStreak, 5000 / ingameData.timeCoef)
-    }
-}
-
-function pressed () {
-    pressSnd.play()
-    gameModeStylesPressed()
-}
-
-function released (){
-    releaseSnd.play()
-    gameModeStylesReleased()
-}
-
 function changeGabarites () {
     const gameAreaheight = gameArea.getBoundingClientRect().height;
     const gameAreaWidth = gameArea.getBoundingClientRect().width;
@@ -88,34 +47,81 @@ function gameModeStylesReleased () {
     } else  {
         clicker.style.backgroundColor = "#f4f0d9";
     }
-    }
-    
-function gameModeStylesPressed () {
-        if (ingameData.gameMode === 0) {
-            clicker.style.backgroundColor = "#1f0000";
-        } else if (ingameData.gameMode === 1) {
-            clicker.style.backgroundColor = "#5f0101";
-        } else if (ingameData.gameMode === 2) {
-            clicker.style.backgroundColor = "#690202";
-        } else if (ingameData.gameMode === 3) {
-            clicker.style.backgroundColor = "#6b2500";
-        } else if (ingameData.gameMode === 4) {
-            clicker.style.backgroundColor = "#723514";
-        } else if (ingameData.gameMode === 5) {
-            clicker.style.backgroundColor = "#6b5d15";
-        } else if (ingameData.gameMode === 6) {
-            clicker.style.backgroundColor = "#947c00";
-        } else if (ingameData.gameMode === 7) {
-            clicker.style.backgroundColor = "#ac9001";
-        } else if (ingameData.gameMode === 8) {
-            clicker.style.backgroundColor = "#d5b303";
-        } else if (ingameData.gameMode === 9) {
-            clicker.style.backgroundColor = "#aea369";
-        } else  {
-            clicker.style.backgroundColor = "#cbc6ad";
-        }
-        }
+}
 
+function gameModeStylesPressed () {
+    if (ingameData.gameMode === 0) {
+        clicker.style.backgroundColor = "#1f0000";
+    } else if (ingameData.gameMode === 1) {
+        clicker.style.backgroundColor = "#5f0101";
+    } else if (ingameData.gameMode === 2) {
+        clicker.style.backgroundColor = "#690202";
+    } else if (ingameData.gameMode === 3) {
+        clicker.style.backgroundColor = "#6b2500";
+    } else if (ingameData.gameMode === 4) {
+        clicker.style.backgroundColor = "#723514";
+    } else if (ingameData.gameMode === 5) {
+        clicker.style.backgroundColor = "#6b5d15";
+    } else if (ingameData.gameMode === 6) {
+        clicker.style.backgroundColor = "#947c00";
+    } else if (ingameData.gameMode === 7) {
+        clicker.style.backgroundColor = "#ac9001";
+    } else if (ingameData.gameMode === 8) {
+        clicker.style.backgroundColor = "#d5b303";
+    } else if (ingameData.gameMode === 9) {
+        clicker.style.backgroundColor = "#aea369";
+    } else  {
+        clicker.style.backgroundColor = "#cbc6ad";
+    }
+}
+
+function clicked () {
+    counterValue = 1 * counterValue + (1 * ingameData.clickerCoef);
+    window.localStorage.savedCounterValue = counterValue;
+    counter.innerText = counterValue;
+    ingameData.logicCounter++;
+    if (ingameData.logicCounter >= 25) {
+        ingameData.logicCounter = 0;
+        if (ingameData.gameMode <= 10) {
+            ingameData.timeCoef++;
+            ingameData.clickerCoef++;
+            ingameData.gameMode++;
+        }
+        
+    }
+    clearTimeout(stopWatch);
+    stopWatch = setTimeout(losingStreak, 5000 / ingameData.timeCoef)
+}
+
+function pressed () {
+    pressSnd.play();
+    gameModeStylesPressed();
+}
+
+function released (){
+    releaseSnd.play();
+    gameModeStylesReleased();
+}
+
+function losingStreak () {
+    ingameData.logicCounter = 0;
+    gameModeStylesReleased()
+    if (ingameData.gameMode > 0) {
+        ingameData.gameMode--;
+        ingameData.clickerCoef--;
+        ingameData.timeCoef--;
+        stopWatch = setTimeout(losingStreak, 5000 / ingameData.timeCoef)
+    }
+}
+
+function restart () {
+    counterValue = 0
+    window.localStorage.savedCounterValue = counterValue;
+    counter.innerText = counterValue;
+    ingameData.clickerCoef = 1;
+    ingameData.timeCoef = 1;
+    ingameData.gameMode = 0;
+}
 
 
 
@@ -125,7 +131,8 @@ const buttonContainer = document.querySelector(".button-container");
 const restartButton = document.querySelector(".restart");
 const counter = document.querySelector(".counter");
 const clicker = document.querySelector(".clicker");
-let stopWatch
+let counterValue;
+let stopWatch;
 const pressSnd = new Audio('sound/mousePress.mp3');
 const releaseSnd = new Audio('sound/mouseRelease.mp3');
 const ingameData = {
@@ -134,6 +141,15 @@ const ingameData = {
     gameMode: 0,
     logicCounter: 0,
 }
+
+
+if (window.localStorage.getItem("savedCounterValue") === null) {
+    counterValue = 0;
+} else {
+    counterValue = window.localStorage.getItem("savedCounterValue");
+}
+counter.innerText = counterValue;
+
 
 changeGabarites();
 gameModeStylesReleased();
