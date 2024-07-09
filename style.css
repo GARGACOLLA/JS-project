@@ -20,11 +20,13 @@ body {
 
 .header-container {
     display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100%;
 }
 
 .counter {
-    margin-left: 48.5%;
+    padding-left: 1.5%;
     text-align: center;
     font-size: 4vh;
 }
