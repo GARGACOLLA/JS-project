@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    height: 100%;
+}
+
+header {
+    width: 100%;
+    height: 5%;
+    background-color: #000000;
+    color: #ffffff;
+    width: 100%;
+}
+
+body {
+    background-color: #4b4b4b;
+    align-items: center;
+}
+
+.header-container {
+    display: flex;
+    width: 100%;
+}
+
+.counter {
+    margin-left: 48.5%;
+    text-align: center;
+    font-size: 4vh;
+}
+
+.restart {
+    background: url(image/restart.png) no-repeat;
+    background-size: contain;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+
+.game-area {
+    width: 100%;
+    height: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-container {
+    width: 100%;
+}
+
+.clicker {
+    text-align: center;
+    display: inline-block;
+    border-radius: 100%;
+    width: 100%;
+    cursor: pointer;
+}
