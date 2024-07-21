@@ -21,58 +21,16 @@ function changeGabarites () {
 }
 
 function gameModeStylesReleased () {
-    if (ingameData.gameMode === 0) {
-        clicker.style.backgroundColor = "#330000";
-        clicker.style.color = "#ffffff";
-    } else if (ingameData.gameMode === 1) {
-        clicker.style.backgroundColor = "#710000";
-    } else if (ingameData.gameMode === 2) {
-        clicker.style.backgroundColor = "#820000";
-    } else if (ingameData.gameMode === 3) {
-        clicker.style.backgroundColor = "#7c2a00";
-    } else if (ingameData.gameMode === 4) {
-        clicker.style.backgroundColor = "#894019";
-    } else if (ingameData.gameMode === 5) {
-        clicker.style.backgroundColor = "#82711a";
-    } else if (ingameData.gameMode === 6) {
-        clicker.style.backgroundColor = "#aa8f00";
-    } else if (ingameData.gameMode === 7) {
-        clicker.style.backgroundColor = "#bc9d00";
-    } else if (ingameData.gameMode === 8) {
-        clicker.style.backgroundColor = "#f1ca00";
+    clicker.style.backgroundColor = releasedColors[ingameData.gameMode];    
+    if (ingameData.gameMode === 0 || ingameData.gameMode === 8) {
         clicker.style.color = "#ffffff";
     } else if (ingameData.gameMode === 9) {
-        clicker.style.backgroundColor = "#ddcf85";
         clicker.style.color = "#000000";
-    } else  {
-        clicker.style.backgroundColor = "#f4f0d9";
     }
 }
 
 function gameModeStylesPressed () {
-    if (ingameData.gameMode === 0) {
-        clicker.style.backgroundColor = "#1f0000";
-    } else if (ingameData.gameMode === 1) {
-        clicker.style.backgroundColor = "#5f0101";
-    } else if (ingameData.gameMode === 2) {
-        clicker.style.backgroundColor = "#690202";
-    } else if (ingameData.gameMode === 3) {
-        clicker.style.backgroundColor = "#6b2500";
-    } else if (ingameData.gameMode === 4) {
-        clicker.style.backgroundColor = "#723514";
-    } else if (ingameData.gameMode === 5) {
-        clicker.style.backgroundColor = "#6b5d15";
-    } else if (ingameData.gameMode === 6) {
-        clicker.style.backgroundColor = "#947c00";
-    } else if (ingameData.gameMode === 7) {
-        clicker.style.backgroundColor = "#ac9001";
-    } else if (ingameData.gameMode === 8) {
-        clicker.style.backgroundColor = "#d5b303";
-    } else if (ingameData.gameMode === 9) {
-        clicker.style.backgroundColor = "#aea369";
-    } else  {
-        clicker.style.backgroundColor = "#cbc6ad";
-    }
+    clicker.style.backgroundColor = pressedColors[ingameData.gameMode];
 }
 
 function clicked () {
@@ -133,6 +91,8 @@ const counter = document.querySelector(".counter");
 const clicker = document.querySelector(".clicker");
 let counterValue;
 let stopWatch;
+const releasedColors = ["#330000", "#710000", "#820000", "#7c2a00", "#894019", "#82711a", "#aa8f00", "#bc9d00", "#f1ca00", "#ddcf85", "#f4f0d9"];
+const pressedColors = ["#1f0000", "#5f0101", "#690202", "#6b2500", "#723514", "#6b5d15", "#947c00", "#ac9001", "#d5b303", "#aea369", "#cbc6ad"];
 const pressSnd = new Audio('sound/mousePress.mp3');
 const releaseSnd = new Audio('sound/mouseRelease.mp3');
 const ingameData = {
